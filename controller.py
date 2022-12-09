@@ -22,7 +22,7 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.mute_button.clicked.connect(lambda: self.mute())
         self.channel_up_button.clicked.connect(lambda: self.channel_up())
         self.channel_down_button.clicked.connect(lambda: self.channel_down())
-        self.netflix_button.connect(lambda: self.netflix())
+        self.netflix_button.clicked.connect(lambda: self.netflix())
         self.__status = False
         self.__muted = False
         self.__volume = Controller.MIN_VOLUME
@@ -31,13 +31,16 @@ class Controller(QMainWindow, Ui_MainWindow):
     def tv_screen(self):
         if self.__status:
             if self.__channel == 0:
-                # screen for channel 0
+                self.tv_output.setPixmap(QtGui.QPixmap('CNN.png'))
             elif self.__channel == 1:
-                # screen for channel 1
+                self.tv_output.setPixmap(QtGui.QPixmap('HBO.png'))
             elif self.__channel == 2:
-                # screen for channel 2
+                self.tv_output.setPixmap(QtGui.QPixmap('ESPN.png'))
             elif self.__channel == 3:
-                # screen for netflix
+                self.tv_output.setPixmap(QtGui.QPixmap('NETFLIX.png'))
+            else:
+                self.tv_output.setStyleSheet("background-color: rgb(0, 0, 0);")
+
 
     def power(self):
         if not self.__status:
@@ -80,7 +83,8 @@ class Controller(QMainWindow, Ui_MainWindow):
         Controller.tv_screen(self)
 
     def netflix(self):
-        self.__channel = Controller.MAX_CHANNEL
+        if self.__status:
+            self.__channel = Controller.MAX_CHANNEL
         Controller.tv_screen(self)
 
 

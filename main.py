@@ -6,7 +6,7 @@ def main():
     app = QApplication([])
     window = Controller()
     window.show()
-    app.excec_()
+    app.exec_()
 
 
 if __name__ == '__main__':

@@ -15,18 +15,17 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(377, 520)
+        MainWindow.setMinimumSize(QtCore.QSize(377, 520))
+        MainWindow.setMaximumSize(QtCore.QSize(377, 520))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.tv_screen = QtWidgets.QOpenGLWidget(self.centralwidget)
-        self.tv_screen.setGeometry(QtCore.QRect(40, 10, 321, 221))
-        self.tv_screen.setObjectName("tv_screen")
-        self.verticalSlider = QtWidgets.QSlider(self.centralwidget)
-        self.verticalSlider.setGeometry(QtCore.QRect(10, 30, 22, 171))
-        self.verticalSlider.setOrientation(QtCore.Qt.Vertical)
-        self.verticalSlider.setObjectName("verticalSlider")
+        self.volume_slider = QtWidgets.QSlider(self.centralwidget)
+        self.volume_slider.setGeometry(QtCore.QRect(10, 30, 22, 171))
+        self.volume_slider.setOrientation(QtCore.Qt.Vertical)
+        self.volume_slider.setObjectName("volume_slider")
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(130, 260, 121, 201))
-        self.frame.setStyleSheet("\n"
+        self.frame.setStyleSheet("border-radius:5px;\n"
 "background-color: rgb(65, 65, 65);\n"
 "")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -68,12 +67,18 @@ class Ui_MainWindow(object):
         self.channel_up_button.setObjectName("channel_up_button")
         self.power_button = QtWidgets.QPushButton(self.frame)
         self.power_button.setGeometry(QtCore.QRect(30, 10, 61, 21))
-        self.power_button.setStyleSheet("color: rgb(255, 255, 255);")
+        self.power_button.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color: rgb(255, 0, 0);\n"
+"border-radius: 3px;\n"
+"\n"
+"")
         self.power_button.setObjectName("power_button")
         self.netflix_button = QtWidgets.QPushButton(self.frame)
         self.netflix_button.setGeometry(QtCore.QRect(30, 140, 61, 16))
         self.netflix_button.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(255, 0, 0);")
+"color: rgb(255, 0, 0);\n"
+"border-radius: 3px;\n"
+"")
         self.netflix_button.setObjectName("netflix_button")
         self.label_3 = QtWidgets.QLabel(self.frame)
         self.label_3.setGeometry(QtCore.QRect(40, 170, 55, 16))
@@ -106,6 +111,12 @@ class Ui_MainWindow(object):
         self.label_5.setFont(font)
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
+        self.tv_output = QtWidgets.QLabel(self.centralwidget)
+        self.tv_output.setGeometry(QtCore.QRect(40, 10, 321, 221))
+        self.tv_output.setStyleSheet("background-color: rgb(0, 0, 0);")
+        self.tv_output.setText("")
+        self.tv_output.setScaledContents(True)
+        self.tv_output.setObjectName("tv_output")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 377, 21))
