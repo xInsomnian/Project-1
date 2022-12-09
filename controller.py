@@ -27,9 +27,12 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.__muted = False
         self.__volume = Controller.MIN_VOLUME
         self.__channel = Controller.MIN_CHANNEL
+        self.volume_slider.setValue(self.__volume)
 
     def tv_screen(self):
-        if self.__status:
+        if not self.__status:
+            self.tv_output.clear()
+        else:
             if self.__channel == 0:
                 self.tv_output.setPixmap(QtGui.QPixmap('CNN.png'))
             elif self.__channel == 1:
@@ -38,8 +41,7 @@ class Controller(QMainWindow, Ui_MainWindow):
                 self.tv_output.setPixmap(QtGui.QPixmap('ESPN.png'))
             elif self.__channel == 3:
                 self.tv_output.setPixmap(QtGui.QPixmap('NETFLIX.png'))
-            else:
-                self.tv_output.setStyleSheet("background-color: rgb(0, 0, 0);")
+
 
 
     def power(self):
@@ -51,21 +53,27 @@ class Controller(QMainWindow, Ui_MainWindow):
         Controller.tv_screen(self)
 
     def volume_up(self):
-        if self.__status and self.__volume < Controller.MAX_VOLUME:
+        if self.__status and not self.__muted and self.__volume < Controller.MAX_VOLUME:
             self.__volume += 1
-            #move slider as well
+            self.volume_slider.setValue(self.__volume)
 
     def volume_down(self):
-        if self.__status and self.__volume > Controller.MIN_VOLUME:
+        if self.__status and not self.__muted and self.__volume > Controller.MIN_VOLUME:
             self.__volume -= 1
-            #move slider as well
+            self.volume_slider.setValue(self.__volume)
 
     def mute(self):
-        if not self.__muted:
-            self.__muted = True
-            # grey out volume buttons
-        else:
-            self.__status = False
+        if self.__status:
+            if not self.__muted:
+                self.__muted = True
+                self.volume_down_button.setStyleSheet('color:gray;')
+                self.volume_up_button.setStyleSheet('color:gray;')
+                self.label.setStyleSheet('color:gray;')
+            else:
+                self.__muted = False
+                self.volume_down_button.setStyleSheet("color: rgb(255, 255, 255);")
+                self.volume_up_button.setStyleSheet("color: rgb(255, 255, 255);")
+                self.label.setStyleSheet("color: rgb(255, 255, 255);")
 
     def channel_up(self):
         if self.__status:

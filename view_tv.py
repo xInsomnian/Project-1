@@ -14,13 +14,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setEnabled(True)
         MainWindow.resize(377, 520)
         MainWindow.setMinimumSize(QtCore.QSize(377, 520))
         MainWindow.setMaximumSize(QtCore.QSize(377, 520))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.volume_slider = QtWidgets.QSlider(self.centralwidget)
+        self.volume_slider.setEnabled(False)
         self.volume_slider.setGeometry(QtCore.QRect(10, 30, 22, 171))
+        self.volume_slider.setMaximum(2)
+        self.volume_slider.setPageStep(2)
         self.volume_slider.setOrientation(QtCore.Qt.Vertical)
         self.volume_slider.setObjectName("volume_slider")
         self.frame = QtWidgets.QFrame(self.centralwidget)
